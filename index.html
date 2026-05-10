@@ -6,76 +6,128 @@
     <title>License Admin - Tạo Mã Kích Hoạt</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --panel: rgba(15, 23, 42, 0.86);
-            --panel-2: rgba(30, 41, 59, 0.88);
-            --border: rgba(148, 163, 184, 0.24);
-            --text: #e2e8f0;
-            --muted: #94a3b8;
-            --accent: #22c55e;
-            --accent-2: #2563eb;
-            --danger: #ef4444;
-            --warning: #f59e0b;
+            --bg-main: #eff6ff;
+            --bg-alt: #dbeafe;
+            --paper: rgba(255, 255, 255, 0.82);
+            --paper-strong: rgba(255, 255, 255, 0.92);
+            --ink: #111827;
+            --ink-soft: #4b5563;
+            --line: rgba(17, 24, 39, 0.14);
+            --brand: #2563eb;
+            --brand-deep: #1d4ed8;
+            --teal: #0f766e;
+            --gold: #0369a1;
+            --danger: #b91c1c;
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --shadow: 0 18px 42px rgba(37, 99, 235, 0.16);
+            --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: Inter, Segoe UI, Arial, sans-serif;
-            color: var(--text);
+            font-family: "Be Vietnam Pro", "Nunito Sans", "Segoe UI", sans-serif;
+            color: var(--ink);
             background:
-                radial-gradient(circle at top left, rgba(37, 99, 235, 0.28), transparent 32%),
-                radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.22), transparent 28%),
-                linear-gradient(135deg, #020617 0%, #0f172a 48%, #111827 100%);
-            padding: 32px 16px;
+                radial-gradient(circle at 12% 14%, rgba(37, 99, 235, 0.2), transparent 28%),
+                radial-gradient(circle at 92% 88%, rgba(14, 116, 144, 0.18), transparent 34%),
+                linear-gradient(125deg, var(--bg-main) 0%, #dbeafe 42%, #bfdbfe 100%);
+            padding: 28px 16px 40px;
         }
 
         .wrap {
-            max-width: 1100px;
+            width: min(1160px, 100%);
             margin: 0 auto;
+            display: grid;
+            gap: 18px;
         }
 
         .hero {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(15, 23, 42, 0.96));
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 24px;
-            padding: 28px;
-            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(239, 246, 255, 0.96) 100%);
+            box-shadow: var(--shadow);
+            padding: 26px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -70px;
+            top: -90px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.34), rgba(37, 99, 235, 0));
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            border: 1px solid rgba(37, 99, 235, 0.24);
+            background: rgba(219, 234, 254, 0.92);
+            color: #1e3a8a;
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 7px 12px;
         }
 
         .hero h1 {
-            margin: 0 0 10px;
-            font-size: 34px;
-            line-height: 1.1;
+            margin: 12px 0 10px;
+            font-family: "Montserrat", "Be Vietnam Pro", sans-serif;
+            font-size: clamp(30px, 4vw, 44px);
+            letter-spacing: 0.01em;
+            line-height: 1.03;
+            color: #1e3a8a;
         }
 
         .hero p {
             margin: 0;
-            color: #dbeafe;
-            max-width: 860px;
+            max-width: 840px;
+            color: #1e40af;
+            line-height: 1.7;
+            font-weight: 500;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr;
             gap: 18px;
-            margin-top: 18px;
         }
 
-        .card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            padding: 20px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+        .card,
+        .info,
+        .panel-wide {
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--line);
+            background: var(--paper);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 12px 26px rgba(30, 64, 175, 0.1);
         }
 
-        .card h2 {
+        .card,
+        .info {
+            padding: 22px;
+        }
+
+        .card h2,
+        .section-title {
             margin: 0 0 14px;
-            font-size: 18px;
+            font-size: 19px;
+            color: #1e3a8a;
+            letter-spacing: 0.01em;
         }
 
         .field {
@@ -84,31 +136,40 @@
 
         .field label {
             display: block;
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 6px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
+            margin-bottom: 7px;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #1e40af;
         }
 
-        textarea, input, select {
+        textarea,
+        input,
+        select {
             width: 100%;
-            border: 1px solid rgba(148, 163, 184, 0.22);
-            background: rgba(15, 23, 42, 0.82);
-            color: var(--text);
-            border-radius: 14px;
+            border: 1px solid rgba(30, 64, 175, 0.16);
+            background: var(--paper-strong);
+            color: var(--ink);
+            border-radius: var(--radius-md);
             padding: 13px 14px;
             font-size: 14px;
             outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         textarea {
-            min-height: 112px;
+            min-height: 128px;
             resize: vertical;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-family: var(--mono);
         }
 
-        input::placeholder, textarea::placeholder { color: #64748b; }
+        textarea:focus,
+        input:focus,
+        select:focus {
+            border-color: rgba(37, 99, 235, 0.56);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
 
         .row {
             display: grid;
@@ -120,73 +181,117 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         button {
             border: 0;
-            border-radius: 14px;
-            padding: 12px 16px;
+            border-radius: 999px;
+            padding: 11px 16px;
             font-weight: 800;
+            letter-spacing: 0.01em;
             cursor: pointer;
-            transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
         }
 
-        button:hover { transform: translateY(-1px); }
-        button:active { transform: translateY(0); }
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+            filter: brightness(0.98);
+        }
 
         .primary {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            box-shadow: 0 10px 24px rgba(34, 197, 94, 0.28);
+            background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(194, 65, 12, 0.3);
         }
 
         .secondary {
-            background: linear-gradient(135deg, #334155, #1e293b);
-            color: white;
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(8, 145, 178, 0.24);
         }
 
-        .info {
-            background: var(--panel-2);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            padding: 18px;
+        .danger {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(185, 28, 28, 0.2);
+        }
+
+        .output {
+            margin-top: 14px;
+            border: 1px dashed rgba(30, 64, 175, 0.26);
+            background:
+                linear-gradient(135deg, rgba(219, 234, 254, 0.8), rgba(255, 255, 255, 0.7));
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .muted {
+            color: var(--ink-soft);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .license {
+            font-size: clamp(20px, 2.7vw, 28px);
+            font-weight: 900;
+            font-family: var(--mono);
+            letter-spacing: 0.06em;
+            color: #1d4ed8;
+            word-break: break-all;
+            margin: 9px 0 0;
         }
 
         .dashboard {
-            margin-top: 18px;
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 12px;
         }
 
         .metric {
-            background: rgba(15, 23, 42, 0.84);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            border-radius: 18px;
+            border-radius: var(--radius-lg);
             padding: 16px;
+            border: 1px solid rgba(30, 64, 175, 0.18);
+            background: rgba(255, 255, 255, 0.76);
+            position: relative;
+            overflow: hidden;
         }
 
-        .metric .value {
-            font-size: 28px;
-            font-weight: 900;
-            margin-top: 8px;
-            color: #86efac;
+        .metric::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: -44px;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.22);
         }
 
         .metric .label {
-            font-size: 12px;
-            color: var(--muted);
-            font-weight: 700;
+            position: relative;
+            font-size: 11px;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            color: #1e40af;
+            font-weight: 800;
+        }
+
+        .metric .value {
+            position: relative;
+            margin-top: 10px;
+            font-size: clamp(22px, 3vw, 30px);
+            line-height: 1.05;
+            color: #1e3a8a;
+            font-weight: 900;
+            word-break: break-word;
         }
 
         .panel-wide {
-            margin-top: 18px;
-            background: rgba(15, 23, 42, 0.82);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            border-radius: 22px;
             padding: 18px;
             overflow-x: auto;
         }
@@ -194,141 +299,127 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 860px;
+            min-width: 880px;
         }
 
         .table th,
         .table td {
             text-align: left;
             padding: 12px 10px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
             font-size: 13px;
             vertical-align: top;
+            border-bottom: 1px solid rgba(30, 64, 175, 0.12);
         }
 
         .table th {
-            color: #cbd5e1;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.08em;
+            color: #1e40af;
+            font-weight: 800;
+            background: rgba(239, 246, 255, 0.9);
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 5px 10px;
+            padding: 4px 10px;
             border-radius: 999px;
-            font-size: 12px;
-            font-weight: 800;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
         }
 
-        .badge.ok { background: rgba(34, 197, 94, 0.16); color: #86efac; }
-        .badge.warn { background: rgba(245, 158, 11, 0.16); color: #fcd34d; }
-        .badge.info { background: rgba(37, 99, 235, 0.16); color: #93c5fd; }
+        .badge.ok {
+            background: rgba(15, 118, 110, 0.16);
+            color: #0f766e;
+        }
+
+        .badge.warn {
+            background: rgba(245, 158, 11, 0.16);
+            color: var(--gold);
+        }
+
+        .badge.info {
+            background: rgba(37, 99, 235, 0.14);
+            color: #1d4ed8;
+        }
 
         .table-actions {
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .table-actions button {
-            padding: 8px 10px;
             border-radius: 10px;
+            padding: 7px 10px;
             font-size: 12px;
         }
 
         .ghost {
-            background: rgba(148, 163, 184, 0.14);
-            color: #e2e8f0;
+            color: #1e3a8a;
+            background: rgba(219, 234, 254, 0.85);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            box-shadow: none;
         }
 
-        .stat {
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-            padding: 10px 0;
-            font-size: 14px;
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .stat span:first-child { color: var(--muted); }
-        .stat:last-child { border-bottom: 0; }
+        @media (max-width: 700px) {
+            body {
+                padding: 18px 12px 30px;
+            }
 
-        .output {
-            margin-top: 14px;
-            background: rgba(2, 6, 23, 0.88);
-            border: 1px dashed rgba(148, 163, 184, 0.28);
-            border-radius: 18px;
-            padding: 16px;
-        }
+            .hero,
+            .card,
+            .info,
+            .panel-wide {
+                border-radius: 20px;
+            }
 
-        .license {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 0.08em;
-            word-break: break-all;
-            color: #86efac;
-            margin: 8px 0 0;
-        }
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
 
-        .muted { color: var(--muted); font-size: 13px; }
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 999px;
-            padding: 8px 12px;
-            background: rgba(37, 99, 235, 0.14);
-            color: #bfdbfe;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .small {
-            font-size: 12px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
-        .section-title {
-            margin: 0 0 12px;
-            font-size: 18px;
-        }
-
-        .danger {
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
-            color: white;
-        }
-
-        @media (max-width: 900px) {
-            .grid { grid-template-columns: 1fr; }
-            .dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .row { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 28px; }
-        }
-
-        @media (max-width: 640px) {
-            .dashboard { grid-template-columns: 1fr; }
+            .actions button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <div class="hero">
-            <div class="tag">🔐 Quản trị license one-time</div>
-            <h1>License Admin</h1>
-            <p>Dùng trang này để tạo mã kích hoạt theo máy. Nhập Mã thiết bị từ người dùng, bấm tạo mã, sau đó gửi lại License Key cho đúng máy đó.</p>
-        </div>
+        <section class="hero">
+            <div class="tag">Bảng điều khiển bản quyền</div>
+            <h1>Trang quản trị License</h1>
+            <p>
+                Giao diện quản trị dành cho việc cấp mã kích hoạt theo từng máy. Bạn chỉ cần dán Machine ID,
+                tạo mã, sau đó gửi lại cho đúng người dùng.
+            </p>
+        </section>
 
-        <div class="grid">
-            <div class="card">
-                <h2>Nhập dữ liệu</h2>
+        <section class="grid">
+            <article class="card">
+                <h2>Tạo mã kích hoạt</h2>
 
                 <div class="field">
-                    <label for="machineId">Mã thiết bị</label>
-                    <textarea id="machineId" placeholder="Dán Machine ID người dùng gửi ở đây"></textarea>
+                    <label for="machineId">Machine ID</label>
+                    <textarea id="machineId" placeholder="Dán Machine ID người dùng gửi"></textarea>
                 </div>
 
                 <div class="row">
@@ -345,60 +436,43 @@
                 <div class="actions">
                     <button id="btnGenerate" class="primary">Tạo mã kích hoạt</button>
                     <button id="btnCopy" class="secondary">Sao chép mã</button>
-                    <button id="btnClear" class="danger">Xóa</button>
+                    <button id="btnClear" class="danger">Đặt lại</button>
                 </div>
 
                 <div class="output">
-                    <div class="muted">License Key</div>
+                    <div class="muted">Mã kích hoạt đã tạo</div>
                     <div id="licenseKey" class="license">-</div>
                 </div>
-            </div>
+            </article>
+        </section>
 
-            <div class="info">
-                <h2>Hướng dẫn quản trị</h2>
-                <div class="stat"><span>1. Machine ID</span><span>Người dùng gửi cho bạn</span></div>
-                <div class="stat"><span>2. Tạo license</span><span>Bằng file này</span></div>
-                <div class="stat"><span>3. Gửi lại key</span><span>Chỉ dùng trên máy đó</span></div>
-                <div class="stat"><span>4. Hết quyền</span><span>Xóa license trên máy</span></div>
-
-                <p class="small">
-                    Lưu ý: file này dùng cùng thuật toán với [license-manager.js](license-manager.js) trong extension.
-                    Nếu bạn đổi secret key trong extension thì phải đổi đồng bộ ở đây.
-                </p>
-
-                <p class="small">
-                    Cách dùng nhanh: dán Machine ID, bấm <strong>Tạo mã kích hoạt</strong>, rồi gửi chuỗi License Key cho người dùng.
-                </p>
-            </div>
-        </div>
-
-        <div class="dashboard">
-            <div class="metric">
+        <section class="dashboard">
+            <article class="metric">
                 <div class="label">Máy đã ghi nhận</div>
                 <div id="metricMachines" class="value">0</div>
-            </div>
-            <div class="metric">
+            </article>
+            <article class="metric">
                 <div class="label">Đã kích hoạt</div>
                 <div id="metricActivated" class="value">0</div>
-            </div>
-            <div class="metric">
+            </article>
+            <article class="metric">
                 <div class="label">Đang chờ</div>
                 <div id="metricPending" class="value">0</div>
-            </div>
-            <div class="metric">
+            </article>
+            <article class="metric">
                 <div class="label">Kích hoạt gần nhất</div>
                 <div id="metricLatest" class="value">-</div>
-            </div>
-        </div>
+            </article>
+        </section>
 
-        <div class="panel-wide">
-            <h2 class="section-title">Danh sách máy đã kích hoạt</h2>
+        <section class="panel-wide">
+            <h2 class="section-title">Danh sách máy đã cấp key</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Machine ID</th>
-                        <th>License Key</th>
+                        <th>Mã kích hoạt</th>
                         <th>Ngày cấp</th>
                         <th>Thời gian kích hoạt</th>
                         <th>Trạng thái</th>
@@ -407,7 +481,7 @@
                 </thead>
                 <tbody id="recordsTableBody"></tbody>
             </table>
-        </div>
+        </section>
     </div>
 
     <script>
