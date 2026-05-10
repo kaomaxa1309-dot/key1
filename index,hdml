@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Admin - Tạo Mã Kích Hoạt</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --panel: rgba(15, 23, 42, 0.86);
+            --panel-2: rgba(30, 41, 59, 0.88);
+            --border: rgba(148, 163, 184, 0.24);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --accent: #22c55e;
+            --accent-2: #2563eb;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.28), transparent 32%),
+                radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.22), transparent 28%),
+                linear-gradient(135deg, #020617 0%, #0f172a 48%, #111827 100%);
+            padding: 32px 16px;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(15, 23, 42, 0.96));
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #dbeafe;
+            max-width: 860px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+        }
+
+        .card h2 {
+            margin: 0 0 14px;
+            font-size: 18px;
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 6px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        textarea, input, select {
+            width: 100%;
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            background: rgba(15, 23, 42, 0.82);
+            color: var(--text);
+            border-radius: 14px;
+            padding: 13px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 112px;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        input::placeholder, textarea::placeholder { color: #64748b; }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        button {
+            border: 0;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        button:hover { transform: translateY(-1px); }
+        button:active { transform: translateY(0); }
+
+        .primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 10px 24px rgba(34, 197, 94, 0.28);
+        }
+
+        .secondary {
+            background: linear-gradient(135deg, #334155, #1e293b);
+            color: white;
+        }
+
+        .info {
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 18px;
+        }
+
+        .dashboard {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .metric {
+            background: rgba(15, 23, 42, 0.84);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .metric .value {
+            font-size: 28px;
+            font-weight: 900;
+            margin-top: 8px;
+            color: #86efac;
+        }
+
+        .metric .label {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .panel-wide {
+            margin-top: 18px;
+            background: rgba(15, 23, 42, 0.82);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 22px;
+            padding: 18px;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 860px;
+        }
+
+        .table th,
+        .table td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        .table th {
+            color: #cbd5e1;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .badge.ok { background: rgba(34, 197, 94, 0.16); color: #86efac; }
+        .badge.warn { background: rgba(245, 158, 11, 0.16); color: #fcd34d; }
+        .badge.info { background: rgba(37, 99, 235, 0.16); color: #93c5fd; }
+
+        .table-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .table-actions button {
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .ghost {
+            background: rgba(148, 163, 184, 0.14);
+            color: #e2e8f0;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .stat span:first-child { color: var(--muted); }
+        .stat:last-child { border-bottom: 0; }
+
+        .output {
+            margin-top: 14px;
+            background: rgba(2, 6, 23, 0.88);
+            border: 1px dashed rgba(148, 163, 184, 0.28);
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .license {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            word-break: break-all;
+            color: #86efac;
+            margin: 8px 0 0;
+        }
+
+        .muted { color: var(--muted); font-size: 13px; }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(37, 99, 235, 0.14);
+            color: #bfdbfe;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .small {
+            font-size: 12px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .danger {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            color: white;
+        }
+
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            .dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .row { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 28px; }
+        }
+
+        @media (max-width: 640px) {
+            .dashboard { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="hero">
+            <div class="tag">🔐 Quản trị license one-time</div>
+            <h1>License Admin</h1>
+            <p>Dùng trang này để tạo mã kích hoạt theo máy. Nhập Mã thiết bị từ người dùng, bấm tạo mã, sau đó gửi lại License Key cho đúng máy đó.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Nhập dữ liệu</h2>
+
+                <div class="field">
+                    <label for="machineId">Mã thiết bị</label>
+                    <textarea id="machineId" placeholder="Dán Machine ID người dùng gửi ở đây"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label for="secretKey">Secret key</label>
+                        <input id="secretKey" type="text" value="TU_DIEN_NHAN_XET_THCS_PRO_V2_2024" />
+                    </div>
+                    <div class="field">
+                        <label for="prefix">Ghi chú</label>
+                        <input id="prefix" type="text" value="One-time machine license" />
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="btnGenerate" class="primary">Tạo mã kích hoạt</button>
+                    <button id="btnCopy" class="secondary">Sao chép mã</button>
+                    <button id="btnClear" class="danger">Xóa</button>
+                </div>
+
+                <div class="output">
+                    <div class="muted">License Key</div>
+                    <div id="licenseKey" class="license">-</div>
+                </div>
+            </div>
+
+            <div class="info">
+                <h2>Hướng dẫn quản trị</h2>
+                <div class="stat"><span>1. Machine ID</span><span>Người dùng gửi cho bạn</span></div>
+                <div class="stat"><span>2. Tạo license</span><span>Bằng file này</span></div>
+                <div class="stat"><span>3. Gửi lại key</span><span>Chỉ dùng trên máy đó</span></div>
+                <div class="stat"><span>4. Hết quyền</span><span>Xóa license trên máy</span></div>
+
+                <p class="small">
+                    Lưu ý: file này dùng cùng thuật toán với [license-manager.js](license-manager.js) trong extension.
+                    Nếu bạn đổi secret key trong extension thì phải đổi đồng bộ ở đây.
+                </p>
+
+                <p class="small">
+                    Cách dùng nhanh: dán Machine ID, bấm <strong>Tạo mã kích hoạt</strong>, rồi gửi chuỗi License Key cho người dùng.
+                </p>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="metric">
+                <div class="label">Máy đã ghi nhận</div>
+                <div id="metricMachines" class="value">0</div>
+            </div>
+            <div class="metric">
+                <div class="label">Đã kích hoạt</div>
+                <div id="metricActivated" class="value">0</div>
+            </div>
+            <div class="metric">
+                <div class="label">Đang chờ</div>
+                <div id="metricPending" class="value">0</div>
+            </div>
+            <div class="metric">
+                <div class="label">Kích hoạt gần nhất</div>
+                <div id="metricLatest" class="value">-</div>
+            </div>
+        </div>
+
+        <div class="panel-wide">
+            <h2 class="section-title">Danh sách máy đã kích hoạt</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Machine ID</th>
+                        <th>License Key</th>
+                        <th>Ngày cấp</th>
+                        <th>Thời gian kích hoạt</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="recordsTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const SECRET_KEY_DEFAULT = 'TU_DIEN_NHAN_XET_THCS_PRO_V2_2024';
+        const STORAGE_KEY = 'licenseAdminRecords';
+
+        async function generateLicenseKey(machineId, secretKey) {
+            const encoder = new TextEncoder();
+            const dataToSign = machineId + secretKey;
+            const data = encoder.encode(dataToSign);
+            const key = await crypto.subtle.importKey(
+                'raw',
+                encoder.encode(secretKey),
+                { name: 'HMAC', hash: 'SHA-256' },
+                false,
+                ['sign']
+            );
+
+            const signature = await crypto.subtle.sign('HMAC', key, data);
+            const signatureArray = Array.from(new Uint8Array(signature));
+            const licenseHex = signatureArray
+                .slice(0, 12)
+                .map((b) => b.toString(16).padStart(2, '0'))
+                .join('')
+                .toUpperCase();
+
+            return `${licenseHex.substring(0, 2)}-${licenseHex.substring(2, 5)}-${licenseHex.substring(5, 8)}-${licenseHex.substring(8, 11)}`;
+        }
+
+        function normalizeMachineId(rawValue) {
+            return rawValue.replace(/[^a-fA-F0-9]/g, '').trim().toUpperCase();
+        }
+
+        function loadRecords() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                const records = raw ? JSON.parse(raw) : [];
+                return Array.isArray(records) ? records : [];
+            } catch (error) {
+                console.error(error);
+                return [];
+            }
+        }
+
+        function saveRecords(records) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+        }
+
+        function formatDateTime(value) {
+            if (!value) return '-';
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return '-';
+            return date.toLocaleString('vi-VN');
+        }
+
+        function summarizeRecords(records) {
+            const activated = records.filter((record) => record.status === 'activated');
+            const pending = records.filter((record) => record.status !== 'activated');
+            const latest = activated
+                .slice()
+                .sort((a, b) => new Date(b.activatedAt || b.createdAt) - new Date(a.activatedAt || a.createdAt))[0];
+
+            document.getElementById('metricMachines').textContent = records.length;
+            document.getElementById('metricActivated').textContent = activated.length;
+            document.getElementById('metricPending').textContent = pending.length;
+            document.getElementById('metricLatest').textContent = latest ? formatDateTime(latest.activatedAt || latest.createdAt) : '-';
+        }
+
+        function renderRecords() {
+            const records = loadRecords();
+            summarizeRecords(records);
+
+            const tbody = document.getElementById('recordsTableBody');
+            tbody.innerHTML = '';
+
+            if (!records.length) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="color:#94a3b8; padding:18px 10px; text-align:center;">
+                            Chưa có máy nào được ghi nhận.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            records
+                .slice()
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .forEach((record, index) => {
+                    const row = document.createElement('tr');
+                    const statusBadge = record.status === 'activated'
+                        ? '<span class="badge ok">Đã kích hoạt</span>'
+                        : record.status === 'pending'
+                            ? '<span class="badge warn">Đang chờ</span>'
+                            : '<span class="badge info">Đã cấp mã</span>';
+
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; word-break: break-all;">${record.machineId || '-'}</td>
+                        <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; word-break: break-all;">${record.licenseKey || '-'}</td>
+                        <td>${formatDateTime(record.createdAt)}</td>
+                        <td>${formatDateTime(record.activatedAt)}</td>
+                        <td>${statusBadge}</td>
+                        <td>
+                            <div class="table-actions">
+                                <button class="ghost" data-action="mark" data-id="${record.id}">Đánh dấu kích hoạt</button>
+                                <button class="ghost" data-action="note" data-id="${record.id}">Sửa ghi chú</button>
+                                <button class="danger" data-action="delete" data-id="${record.id}">Xóa</button>
+                            </div>
+                        </td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+        }
+
+        function upsertRecord(newRecord) {
+            const records = loadRecords();
+            const index = records.findIndex((record) => record.machineId === newRecord.machineId);
+
+            if (index >= 0) {
+                records[index] = { ...records[index], ...newRecord };
+            } else {
+                records.push(newRecord);
+            }
+
+            saveRecords(records);
+            renderRecords();
+        }
+
+        function registerIssuedLicense(machineId, licenseKey) {
+            upsertRecord({
+                id: crypto.randomUUID ? crypto.randomUUID() : `record-${Date.now()}`,
+                machineId,
+                licenseKey,
+                createdAt: new Date().toISOString(),
+                activatedAt: '',
+                status: 'issued',
+                note: ''
+            });
+        }
+
+        function markActivated(recordId) {
+            const records = loadRecords();
+            const target = records.find((record) => record.id === recordId);
+            if (!target) return;
+
+            const input = prompt('Nhập thời gian kích hoạt (để trống để dùng hiện tại):', target.activatedAt ? new Date(target.activatedAt).toISOString().slice(0, 16) : '');
+            if (input === null) return;
+
+            const activatedAt = input.trim() ? new Date(input).toISOString() : new Date().toISOString();
+            target.activatedAt = activatedAt;
+            target.status = 'activated';
+            saveRecords(records);
+            renderRecords();
+        }
+
+        function editNote(recordId) {
+            const records = loadRecords();
+            const target = records.find((record) => record.id === recordId);
+            if (!target) return;
+
+            const note = prompt('Ghi chú cho máy này:', target.note || '');
+            if (note === null) return;
+
+            target.note = note.trim();
+            saveRecords(records);
+            renderRecords();
+        }
+
+        function deleteRecord(recordId) {
+            const records = loadRecords().filter((record) => record.id !== recordId);
+            saveRecords(records);
+            renderRecords();
+        }
+
+        document.getElementById('recordsTableBody').addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+
+            const { action, id } = button.dataset;
+            if (action === 'mark') markActivated(id);
+            if (action === 'note') editNote(id);
+            if (action === 'delete') deleteRecord(id);
+        });
+
+        const machineIdEl = document.getElementById('machineId');
+        const secretKeyEl = document.getElementById('secretKey');
+        const licenseKeyEl = document.getElementById('licenseKey');
+        const btnGenerate = document.getElementById('btnGenerate');
+        const btnCopy = document.getElementById('btnCopy');
+        const btnClear = document.getElementById('btnClear');
+
+        btnGenerate.addEventListener('click', async () => {
+            const machineId = normalizeMachineId(machineIdEl.value);
+            const secretKey = secretKeyEl.value.trim() || SECRET_KEY_DEFAULT;
+
+            if (machineId.length < 8) {
+                alert('Machine ID chưa hợp lệ. Hãy dán mã thiết bị đầy đủ.');
+                return;
+            }
+
+            try {
+                const license = await generateLicenseKey(machineId, secretKey);
+                licenseKeyEl.textContent = license;
+                registerIssuedLicense(machineId, license);
+            } catch (error) {
+                console.error(error);
+                alert('Không thể tạo mã kích hoạt. Kiểm tra lại Machine ID hoặc secret key.');
+            }
+        });
+
+        btnCopy.addEventListener('click', async () => {
+            const text = licenseKeyEl.textContent;
+            if (!text || text === '-') {
+                alert('Chưa có mã để sao chép.');
+                return;
+            }
+            await navigator.clipboard.writeText(text);
+            btnCopy.textContent = 'Đã sao chép';
+            setTimeout(() => (btnCopy.textContent = 'Sao chép mã'), 1600);
+        });
+
+        btnClear.addEventListener('click', () => {
+            machineIdEl.value = '';
+            licenseKeyEl.textContent = '-';
+            secretKeyEl.value = SECRET_KEY_DEFAULT;
+        });
+
+        renderRecords();
+    </script>
+</body>
+</html>
